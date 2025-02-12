@@ -1,4 +1,4 @@
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
   <Product Name="PHP" Id="<?=$product_code?>" UpgradeCode="34B67696-011A-46C7-94F8-FB450EF4CB0D"
       Language="1033" Codepage="1252" Version="<?=$version?>" Manufacturer="PHP Group">
     <Package Id="*" Keywords="Installer" Description="PHP Installer"
@@ -34,6 +34,9 @@
           <Shortcut Id="sct0" Directory="ProgramMenuDir" Name="Interactive Shell" Icon="ico_php.exe" IconIndex="0" Advertise="yes"/>
 <?  endif?>
         </File>
+<?  if ($file === "\\php.exe"):?>
+        <util:InternetShortcut Id="OnlineDocumentationShortcut" Directory="ProgramMenuDir" Name="Online Documentation" Target="https://www.php.net/manual/en/"/>
+<?  endif?>
       </Component>
 <?endforeach?>
     </Feature>
