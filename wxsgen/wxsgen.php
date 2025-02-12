@@ -4,6 +4,7 @@ echo "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n";
 render([
     "version" => "8.4.2",
     "product_code" => gen_uuid(),
+    "component_guid" => gen_uuid(),
 ]);
 
 function render(array $data) {
