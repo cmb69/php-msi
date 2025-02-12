@@ -26,5 +26,7 @@
     <UIRef Id="WixUI_InstallDir"/>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
     <WixVariable Id="WixUILicenseRtf" Value="<?=$license?>"/>
+    <WixVariable Id="WixUIDialogBmp" Value="<?=$dialog?>"/>
+    <WixVariable Id="WixUIBannerBmp" Value="<?=$banner?>"/>
   </Product>
 </Wix>
