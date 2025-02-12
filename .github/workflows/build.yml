@@ -1,34 +1,40 @@
-name: Build PHP MSI
+name: Build PHP MSIs
+run-name: Build PHP ${{github.event.inputs.version}} MSIs
 on:
   workflow_dispatch:
     inputs:
-      basename:
-        description: 'Basename of PHP ZIP'
+      version:
+        description: 'PHP version'
         required: true
 defaults:
   run:
     shell: cmd
 jobs:
   build:
-    name: Build ${{github.event.inputs.basename}}.msi
+    strategy:
+      matrix:
+        arch: [x64, x86]
+        ts: [nts, zts]
     runs-on: windows-2022
+    env:
+      basename: php-${{github.event.inputs.version}}${{matrix.ts == 'nts' && '-nts' || ''}}-Win32-${{github.event.inputs.version > '8.4' && 'vs17' || 'vs16'}}-${{matrix.arch}}
     steps:
       - name: Checkout php-msi
         uses: actions/checkout@v4
       - name: Fetch PHP
         run: |
-          curl -sLO https://windows.php.net/downloads/releases/${{github.event.inputs.basename}}.zip
-          7z x -ophp ${{github.event.inputs.basename}}.zip
+          curl -sLO https://windows.php.net/downloads/releases/${{env.basename}}.zip
+          7z x -ophp ${{env.basename}}.zip
       - name: Generate WXS
         run: php -dshort_open_tag=1 wxsgen\wxsgen.php php php.wxs
       - name: Compile
-        run: candle php.wxs
+        run: candle -arch ${{matrix.arch}} -ext WiXUtilExtension php.wxs
       - name: Link
-        run: light -ext WixUIExtension -out ${{github.event.inputs.basename}}.msi php.wixobj
+        run: light -ext WixUIExtension -ext WiXUtilExtension -sw1076 -out ${{env.basename}}.msi php.wixobj
       - name: Install
-        run: xcopy ${{github.event.inputs.basename}}.msi artifacts\*
+        run: xcopy ${{env.basename}}.msi artifacts\*
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{github.event.inputs.basename}}
+          name: ${{env.basename}}
           path: artifacts
