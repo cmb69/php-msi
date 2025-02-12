@@ -7,9 +7,12 @@ if ($argc !== 3) {
 
 $dir = $argv[1];
 $version = exec("$dir\\php.exe -r \"echo PHP_VERSION;\"");
+$int_size = exec("$dir\\php.exe -r \"echo PHP_INT_SIZE;\"");
+$program_files = ($int_size == 8) ? "ProgramFiles64Folder" : "ProgramFilesFolder";
 [$dirs, $files] = dirs_and_files($dir);
 $data = [
     "version" => $version,
+    "program_files" => $program_files,
     "product_code" => gen_uuid(),
     "license" => __DIR__ . "/../misc/license.rtf",
     "banner" => __DIR__ . "/../misc/banner.bmp",

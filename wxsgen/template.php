@@ -7,7 +7,7 @@
     <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="<?=$downgrade_error?>"/>
     <Media Id="1" Cabinet="php.cab" EmbedCab="yes"/>
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder" Name="PFiles">
+      <Directory Id="<?=$program_files?>" Name="PFiles">
         <Directory Id="INSTALLDIR" Name="PHP"/>
       </Directory>
     </Directory>
