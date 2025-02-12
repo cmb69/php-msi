@@ -18,7 +18,7 @@
     <Feature Id="fPhp">
 <?foreach ($files as $i => [$file, $subdir, $guid]):?>
       <Component Id="cmp_<?=$i?>" Directory="<?=$subdir?>" Guid="<?=$guid?>">
-        <File KeyPath="yes" Source="php<?=$file?>"/>
+        <File KeyPath="yes" Source="<?=$dir?><?=$file?>"/>
       </Component>
 <?endforeach?>
     </Feature>

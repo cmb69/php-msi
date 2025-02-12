@@ -1,6 +1,11 @@
 <?php
 
-$dir = __DIR__ . "/../php";
+if ($argc !== 3) {
+    echo "usage: {$argv[0]} <indir> <outfile>\n";
+    exit(1);
+}
+
+$dir = $argv[1];
 $dirs = ["" => ["INSTALLDIR", null], "\\" => ["INSTALLDIR", null]];
 $files = [];
 $it = new RecursiveDirectoryIterator($dir);
@@ -22,11 +27,14 @@ $data = [
     "version" => "8.4.2",
     "product_code" => gen_uuid(),
     "license" => __DIR__ . "/license.rtf",
+    "dir" => $dir,
     "dirs" => $dirs,
     "files" => $files,
 ];
+ob_start();
 echo "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n";
 render($data);
+file_put_contents($argv[2], ob_get_clean());
 
 function render(array $data) {
     array_walk_recursive($data, function (&$value) {
