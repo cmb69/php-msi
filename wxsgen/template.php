@@ -4,7 +4,7 @@
     <Package Id="*" Keywords="Installer" Description="PHP Installer"
         Comments="Copyright © The PHP Group" Manufacturer="PHP Group"
         InstallerVersion="200" Languages="1033" Compressed="yes" SummaryCodepage="1252"/>
-    <MajorUpgrade DowngradeErrorMessage="<?=$downgrade_error?>"/>
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="<?=$downgrade_error?>"/>
     <Media Id="1" Cabinet="php.cab" EmbedCab="yes"/>
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder" Name="PFiles">
