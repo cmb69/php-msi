@@ -10,10 +10,15 @@
         <Directory Id="INSTALLDIR" Name="PHP"/>
       </Directory>
     </Directory>
+<?foreach ($dirs as [$id, $parent, $name]):?>
+    <DirectoryRef Id="<?=$parent?>">
+      <Directory Id="<?=$id?>" Name="<?=$name?>"/>
+    </DirectoryRef>
+<?endforeach?>
     <Feature Id="fPhp">
-<?foreach ($files as $i => [$file, $guid]):?>
-      <Component Id="cmp_<?=$i?>" Directory="INSTALLDIR" Guid="<?=$guid?>">
-        <File KeyPath="yes" Source="php\<?=$file?>"/>
+<?foreach ($files as $i => [$file, $subdir, $guid]):?>
+      <Component Id="cmp_<?=$i?>" Directory="<?=$subdir?>" Guid="<?=$guid?>">
+        <File KeyPath="yes" Source="php<?=$file?>"/>
       </Component>
 <?endforeach?>
     </Feature>

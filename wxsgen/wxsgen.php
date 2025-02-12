@@ -1,17 +1,30 @@
 <?php
 
-echo "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n";
 $dir = __DIR__ . "/../php";
+$dirs = ["" => ["INSTALLDIR", null], "\\" => ["INSTALLDIR", null]];
 $files = [];
-foreach (scandir($dir) as $file) {
-    if (is_dir($dir . "/" . $file)) continue;
-    $files[] = [$file, gen_uuid()];
+$it = new RecursiveDirectoryIterator($dir);
+$itit = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::SELF_FIRST);
+foreach ($itit as $file) {
+    if ($itit->isDot()) continue;
+    if ($itit->isDir()) {
+        $id = "dir" . (count($dirs) - 2);
+        $subdir = substr($file, strlen($dir));
+        $parent = $dirs[dirname($subdir)][0];
+        $dirs[$subdir] = [$id, $parent, basename($subdir)];
+        continue;
+    }
+    $subdir = substr($file, strlen($dir), -(strlen($file->getFilename()) + 1));
+    $files[] = [substr($file, strlen($dir)), $dirs[$subdir][0], gen_uuid()];
 }
+unset($dirs[""], $dirs["\\"]);
 $data = [
     "version" => "8.4.2",
     "product_code" => gen_uuid(),
+    "dirs" => $dirs,
     "files" => $files,
 ];
+echo "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n";
 render($data);
 
 function render(array $data) {
