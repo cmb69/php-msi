@@ -22,7 +22,8 @@
       </Component>
 <?endforeach?>
     </Feature>
-    <UIRef Id="WixUI_Minimal"/>
+    <UIRef Id="WixUI_InstallDir"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
     <WixVariable Id="WixUILicenseRtf" Value="<?=$license?>"/>
   </Product>
 </Wix>
