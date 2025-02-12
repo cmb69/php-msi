@@ -11,9 +11,11 @@
       </Directory>
     </Directory>
     <Feature Id="fPhp">
-      <Component Id="cmp_1" Directory="INSTALLDIR" Guid="<?=$component_guid?>">
-        <File KeyPath="yes" Source="php\deplister.exe"/>
+<?foreach ($files as $i => [$file, $guid]):?>
+      <Component Id="cmp_<?=$i?>" Directory="INSTALLDIR" Guid="<?=$guid?>">
+        <File KeyPath="yes" Source="php\<?=$file?>"/>
       </Component>
+<?endforeach?>
     </Feature>
     <UIRef Id="WixUI_Minimal"/>
   </Product>

@@ -1,11 +1,18 @@
 <?php
 
 echo "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n";
-render([
+$dir = __DIR__ . "/../php";
+$files = [];
+foreach (scandir($dir) as $file) {
+    if (is_dir($dir . "/" . $file)) continue;
+    $files[] = [$file, gen_uuid()];
+}
+$data = [
     "version" => "8.4.2",
     "product_code" => gen_uuid(),
-    "component_guid" => gen_uuid(),
-]);
+    "files" => $files,
+];
+render($data);
 
 function render(array $data) {
     array_walk_recursive($data, function (&$value) {
