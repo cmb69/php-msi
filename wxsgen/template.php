@@ -4,5 +4,6 @@
   <Package Id="*" Keywords="Installer" Description="PHP Installer"
    Comments="Copyright © The PHP Group" Manufacturer="PHP Group"
    InstallerVersion="200" Languages="1033" Compressed="yes" SummaryCodepage="1252"/>
+  <Media Id="1" Cabinet="php.cab" EmbedCab="yes"/>
  </Product>
 </Wix>
