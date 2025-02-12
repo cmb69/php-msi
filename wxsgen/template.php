@@ -7,7 +7,9 @@
     <Media Id="1" Cabinet="php.cab" EmbedCab="yes"/>
     <Directory Id="TARGETDIR" Name="SourceDir"/>
     <Feature Id="fPhp">
-      <Component Id="cmp_1" Directory="TARGETDIR" Guid="<?=$component_guid?>"/>
+      <Component Id="cmp_1" Directory="TARGETDIR" Guid="<?=$component_guid?>">
+        <File Id="fil6D063D02EE925FBDADCDD3EFEFB6D5DE" KeyPath="yes" Source="php\deplister.exe"/>
+      </Component>
     </Feature>
     <UIRef Id="WixUI_Minimal"/>
   </Product>
