@@ -21,6 +21,7 @@ unset($dirs[""], $dirs["\\"]);
 $data = [
     "version" => "8.4.2",
     "product_code" => gen_uuid(),
+    "license" => __DIR__ . "/license.rtf",
     "dirs" => $dirs,
     "files" => $files,
 ];

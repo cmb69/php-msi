@@ -23,5 +23,6 @@
 <?endforeach?>
     </Feature>
     <UIRef Id="WixUI_Minimal"/>
+    <WixVariable Id="WixUILicenseRtf" Value="<?=$license?>"/>
   </Product>
 </Wix>
