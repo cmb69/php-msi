@@ -6,9 +6,10 @@ if ($argc !== 3) {
 }
 
 $dir = $argv[1];
+$version = exec("$dir\\php.exe -r \"echo PHP_VERSION;\"");
 [$dirs, $files] = dirs_and_files($dir);
 $data = [
-    "version" => "8.4.2",
+    "version" => $version,
     "product_code" => gen_uuid(),
     "license" => __DIR__ . "/../misc/license.rtf",
     "banner" => __DIR__ . "/../misc/banner.bmp",
