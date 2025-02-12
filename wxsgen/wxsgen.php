@@ -11,6 +11,7 @@ $data = [
     "version" => "8.4.2",
     "product_code" => gen_uuid(),
     "license" => __DIR__ . "/../misc/license.rtf",
+    "downgrade_error" => "A newer version of PHP is already installed. To downgrade, first uninstall that version manually.",
     "dir" => $dir,
     "dirs" => $dirs,
     "files" => $files,
